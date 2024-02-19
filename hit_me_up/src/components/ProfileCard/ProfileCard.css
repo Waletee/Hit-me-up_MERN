@@ -8,7 +8,6 @@
   background-color: var(--cardColor);
 }
 
-/* Profile Images */
 .ProfileImages {
   position: relative;
   display: flex;
@@ -28,7 +27,6 @@
   box-shadow: var(--profileShadow);
 }
 
-/* Profile Name */
 .ProfileName {
   display: flex;
   flex-direction: column;
@@ -41,7 +39,6 @@
   font-weight: bold;
 }
 
-/* Follow Status */
 .followStatus {
   display: flex;
   flex-direction: column;
@@ -70,6 +67,7 @@
   align-items: center;
   justify-content: center;
 }
+
 .follow > span:nth-of-type(1) {
   font-weight: bold;
 }
@@ -80,17 +78,15 @@
 }
 
 .vl {
-  height: 150%;
+  height: 110%;
   border-left: 2px solid var(--hrColor);
 }
-
-
 
 
 .ProfileCard>span
 {
     font-weight: bold;
-    color: orange;
+    color: #ea97ea;
     align-self: center;
     margin-bottom: 1rem;
     cursor: pointer;
