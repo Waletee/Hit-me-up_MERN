@@ -14,7 +14,7 @@
 }
 
 
-/* left side */
+/* right side */
 .a-left {
     gap: 2rem;
 }
@@ -48,13 +48,13 @@
 }
 
 
-/* right side */
+/* left side */
 .infoForm {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
+  gap: 3rem;
 }
 
 .infoInput {

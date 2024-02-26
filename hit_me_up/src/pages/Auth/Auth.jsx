@@ -52,7 +52,7 @@ const Auth = () => {
     <div className="Auth">
       {/* left side */}
 
-      <SignUp/>
+      <LogIn/>
 
       {/*<div className="a-right">
         <form className="infoForm authForm" onSubmit={handleSubmit}>
@@ -167,6 +167,47 @@ const Auth = () => {
   );
 };
 
+function LogIn(){
+  return (
+  <div className="a-right">
+        <form className="infoForm authForm">
+          <h3>Login</h3>
+          <div>
+          <input
+                required
+                type="text"
+                placeholder="Username"
+                className="infoInput"
+                name="username"
+              />
+          </div>
+          <div>
+          <input
+                required
+                type="text"
+                placeholder="Password"
+                className="infoInput"
+                name="password"
+              />
+          </div>
+          <span
+              style={{
+                fontSize: "12px",
+                cursor: "pointer",
+                textDecoration: "underline",
+              }}>
+              Don't have an account Sign Up
+            </span>
+            <button
+              className="button infoButton"
+              type="Submit"
+            >
+              Login
+            </button>
+        </form>
+      </div>
+)}
+
 function SignUp(){
   return (
   <div className="a-right">
@@ -180,12 +221,37 @@ function SignUp(){
                 className="infoInput"
                 name="firstname"
               />
-              <input
+          <input
                 required
                 type="text"
                 placeholder="Last Name"
                 className="infoInput"
                 name="lastname"
+              />
+          </div>
+          <div>
+          <input
+                required
+                type="text"
+                placeholder="Username"
+                className="infoInput"
+                name="username"
+              />
+          </div>
+          <div>
+          <input
+                required
+                type="text"
+                placeholder="Password"
+                className="infoInput"
+                name="password"
+              />
+          <input
+                required
+                type="text"
+                placeholder="Confirm Password"
+                className="infoInput"
+                name="confirmpassword"
               />
           </div>
           <span
