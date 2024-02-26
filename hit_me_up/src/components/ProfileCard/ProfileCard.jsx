@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 */}
   const ProfileCard = ({location}) => {
+    const ProfilePage = true;
   {/*const { user } = useSelector((state) => state.authReducer.authData);
   const posts = useSelector((state)=>state.postReducer.posts)
   const serverPublic = process.env.REACT_APP_PUBLIC_FOLDER;*/}
@@ -38,10 +39,20 @@ import { useSelector } from "react-redux";
             <span>128</span>
             <span>Following</span>
           </div>
+          {/* for profilepage */}
+          {ProfilePage && (
+            <>
+            <div className="vl"></div>
+            <div className="follow">
+              <span>2</span>
+              <span>Posts</span>
+            </div>
+            </>
+          )}
         </div>
         <hr />
       </div>
-      <span>My Profile</span>
+      {ProfilePage? '' : <span>My Profile</span>}
 
     </div>
   );
