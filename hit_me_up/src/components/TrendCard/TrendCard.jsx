@@ -1,6 +1,7 @@
 import React from 'react'
 import './TrendCard.css'
 import {TrendData} from '../../Info/TrendData.jsx'
+import ShareModal from '../ShareModal/ShareModal'
 const TrendCard = () => {
   return (
    <div className="TrendCard">
@@ -16,9 +17,7 @@ const TrendCard = () => {
             )
        })}
        <br />
-       <button className="button r-button" /*onClick={() => setModalOpened(true)}*/>
-        Share
-      </button>
+       <ShareModal />
    </div>
   )
 }
