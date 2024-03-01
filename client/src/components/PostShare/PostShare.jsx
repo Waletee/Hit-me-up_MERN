@@ -6,16 +6,16 @@ import { UilPlayCircle } from "@iconscout/react-unicons";
 import { UilLocationPoint } from "@iconscout/react-unicons";
 import { UilSchedule } from "@iconscout/react-unicons";
 import { UilTimes } from "@iconscout/react-unicons";
-/*import { useDispatch, useSelector } from "react-redux";
-import { uploadImage, uploadPost } from "../../actions/UploadAction";*/
+import { useDispatch, useSelector } from "react-redux";
+import { uploadImage, uploadPost } from "../../actions/UploadAction";
 
 const PostShare = () => {
-  /*const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.authReducer.authData);
+  const dispatch = useDispatch();
   const loading = useSelector((state) => state.postReducer.uploading);
-  const serverPublic = process.env.REACT_APP_PUBLIC_FOLDER;*/
+  /*const serverPublic = process.env.REACT_APP_PUBLIC_FOLDER;*/
   const [image, setImage] = useState(null);
   const imageRef = useRef();
+  const { user } = useSelector((state) => state.authReducer.authData);
   const desc = useRef();
   
 
@@ -23,14 +23,11 @@ const PostShare = () => {
   const onImageChange = (e) => {
     if (e.target.files && e.target.files[0]) {
       let img = e.target.files[0];
-      setImage({
-        image: URL.createObjectURL(img)
-      });
+      setImage(img);
     }
   };
 
-
-  /*// handle post upload
+  // handle uploading post
   const handleUpload = async (e) => {
     e.preventDefault();
 
@@ -40,14 +37,19 @@ const PostShare = () => {
       desc: desc.current.value,
     };
 
-    // if there is an image with post
+    // Reset Post Share
+    const resetShare = () => {
+      setImage(null);
+      desc.current.value = "";
+    };
+
+    // if an image is added with the post
     if (image) {
       const data = new FormData();
       const fileName = Date.now() + image.name;
       data.append("name", fileName);
       data.append("file", image);
       newPost.image = fileName;
-      console.log(newPost);
       try {
         dispatch(uploadImage(data));
       } catch (err) {
@@ -57,12 +59,7 @@ const PostShare = () => {
     dispatch(uploadPost(newPost));
     resetShare();
   };
-
-  // Reset Post Share
-  const resetShare = () => {
-    setImage(null);
-    desc.current.value = "";
-  };*/
+  
   return (
     <div className="PostShare">
       <img
@@ -71,7 +68,7 @@ const PostShare = () => {
         alt="Profile"
       />
       <div>
-        <input
+        <input ref={desc} required
           type="text"
           placeholder="A penny for your thought!"
         />
@@ -98,9 +95,8 @@ const PostShare = () => {
             Schedule
           </div>
           <button
-            className="button ps-button"
-          >
-            Share
+            className="button ps-button" onClick={handleUpload} disabled={loading}>
+            {loading? "Uploading..." : "Share"}
           </button>
 
           <div style={{ display: "none" }}>
@@ -110,7 +106,7 @@ const PostShare = () => {
         {image && (
           <div className="previewImage">
             <UilTimes onClick={() => setImage(null)} />
-            <img src={/*URL.createObjectURL(image)*/image.image} alt="preview" />
+            <img src={URL.createObjectURL(image)} alt="preview" />
           </div>
         )}
       </div>

@@ -1,15 +1,17 @@
-import React, { useState, useNavigate, useDispatch } from "react";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import "./Auth.css";
 import Logo from "../../Images/logo1.png";
-/*import { logIn, signUp } from "../../actions/AuthActions.js";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";*/
+import { logIn, signUp } from "../../actions/AuthActions";
+/*import { useNavigate } from "react-router-dom";*/
 
 const Auth = () => {
   const [isSignUp, setIsSignUp] = useState(true);
   const [confirmPassword, setConfirmPassword] = useState(true);
-  /*const navigate = useNavigate();
-  const dispatch = useDispatch()*/
+  const dispatch = useDispatch()
+  /*const navigate = useNavigate()*/
+  /*const loading = useSelector((state) => state.authReducer.loading);*/
+  
   const initialStates = {
     firstname: "",
     lastname: "",
@@ -29,17 +31,17 @@ const Auth = () => {
     /*setConfirmPassword(true);*/
     e.preventDefault();
     if(isSignUp) {
-      if(data.password !== data.confirmpassword)
+      /*if(data.password !== data.confirmpassword)
       {
         setConfirmPassword(false)
-      }
-      /*data.password === data.confirmpassword
-        ? dispatch(signUp(data, navigate))
+      }*/
+      data.password === data.confirmpassword
+        ? dispatch(signUp(data/*, navigate*/))
         : setConfirmPassword(false);
     } else {
-      dispatch(logIn(data, navigate));
-    */}
+      dispatch(logIn(data/*, navigate*/));
   };
+}
 
   // Reset Form
   const resetForm = () => {
@@ -47,15 +49,6 @@ const Auth = () => {
     setData(initialStates);
   };
 
-  {/*
-  const loading = useSelector((state) => state.authReducer.loading);
-  
-  
-
-  // const dispatch = useDispatch()
-  
-
-  */}
 
   return (
     <div className="Auth">
@@ -223,52 +216,9 @@ const Auth = () => {
           <h1>HIT ME UP</h1>
           <h6>Let's connect and share, the world is a lovely place to share.</h6>
         </div>
-      </div>
-
-      
+      </div>      
     </div>
   );
 };
-
-function LogIn(){
-  return (
-  <div className="a-right">
-        <form className="infoForm authForm">
-          <h3>Login</h3>
-          <div>
-          <input
-                required
-                type="text"
-                placeholder="Username"
-                className="infoInput"
-                name="username"
-              />
-          </div>
-          <div>
-          <input
-                required
-                type="text"
-                placeholder="Password"
-                className="infoInput"
-                name="password"
-              />
-          </div>
-          <span
-              style={{
-                fontSize: "12px",
-                cursor: "pointer",
-                textDecoration: "underline",
-              }}>
-              Don't have an account Sign Up
-            </span>
-            <button
-              className="button infoButton"
-              type="Submit"
-            >
-              Login
-            </button>
-        </form>
-      </div>
-)}
 
 export default Auth;
