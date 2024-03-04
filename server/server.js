@@ -15,6 +15,10 @@ import MessageRoute from './Routes/MessageRoute.js'*/}
 
 const app = express();
 
+// Serve images from public folder
+app.use(express.static('public'))
+app.use('/images', express.static("images"))
+
 
 // middleware
 app.use(bodyParser.json({ limit: "30mb", extended: true }));

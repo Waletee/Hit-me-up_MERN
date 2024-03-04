@@ -4,11 +4,11 @@ import Comment from "../../Images/comment.png";
 import Share from "../../Images/share.png";
 import Like from "../../Images/like.png";
 import NotLike from "../../Images/dislike.png";
-/*import { likePost } from "../../api/PostsRequests";
-import { useSelector } from "react-redux";*/
+import { likePost } from "../../api/PostsRequests";
+import { useSelector } from "react-redux";
 
 const Post = ({ data }) => {
-  /*const { user } = useSelector((state) => state.authReducer.authData);
+  const { user } = useSelector((state) => state.authReducer.authData);
   const [liked, setLiked] = useState(data.likes.includes(user._id));
   const [likes, setLikes] = useState(data.likes.length)
 
@@ -17,23 +17,24 @@ const Post = ({ data }) => {
     likePost(data._id, user._id);
     setLiked((prev) => !prev);
     liked? setLikes((prev)=>prev-1): setLikes((prev)=>prev+1)
-  };*/
+  };
+
   return (
     <div className="Post">
       <img
-        src={data.img /*? process.env.REACT_APP_PUBLIC_FOLDER + data.image : ""*/}
+        src={data.image ? process.env.REACT_APP_PUBLIC_FOLDER + data.image : ""}
         alt=""
       />
       <div className="postReact">
         <img
-          src={data.liked ? Like : NotLike}
-          alt=""
+          src={liked ? Like : NotLike}
+          alt="" style={{cursor: "pointer"}} onClick={handleLike}
         />
-        <img src={Comment} alt="" />
-        <img src={Share} alt="" />
+        <img src={Comment} alt="" style={{cursor: "pointer"}} />
+        <img src={Share} alt="" style={{cursor: "pointer"}} />
       </div>
 
-      <span className="right-align" style={{ color: "var(--gray)", fontSize: "13px" }}>{data.likes} likes</span>
+      <span className="right-align" style={{ color: "var(--gray)", fontSize: "13px" }}>{likes} likes</span>
 
       <div className="detail">
       <span className="right-align"><b>{data.name}</b></span>

@@ -25,11 +25,11 @@ function App() {
           path="/auth"
           element={user ? <Navigate to="../home" /> : <Auth />}
         />
-        {/*<Route
+        <Route
           path="/profile/:id"
           element={user ? <Profile /> : <Navigate to="../auth" />}
         />
-        <Route
+        {/*<Route
           path="*"
           element={
             <main style={{ padding: "1rem" }}>

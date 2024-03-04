@@ -12,7 +12,7 @@ import { uploadImage, uploadPost } from "../../actions/UploadAction";
 const PostShare = () => {
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.postReducer.uploading);
-  /*const serverPublic = process.env.REACT_APP_PUBLIC_FOLDER;*/
+  const serverPublic = process.env.REACT_APP_PUBLIC_FOLDER;
   const [image, setImage] = useState(null);
   const imageRef = useRef();
   const { user } = useSelector((state) => state.authReducer.authData);
@@ -63,8 +63,9 @@ const PostShare = () => {
   return (
     <div className="PostShare">
       <img
-        src={ProfileImage
-        }
+        src={user.profilePicture
+          ? serverPublic + user.profilePicture
+          : serverPublic + "default_profile.png"}
         alt="Profile"
       />
       <div>
