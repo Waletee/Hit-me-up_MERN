@@ -1,14 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import "./FollowersCard.css";
-
+import User from "../User/User";
 import { Followers } from "../../Info/FollowerData"
+import { getAllUser } from "../../api/UserRequests";
 
 {/*import FollowersModal from "../FollowersModal/FollowersModal";
 import { getAllUser } from "../../api/UserRequests";
-import User from "../User/User";
 import { useSelector } from "react-redux";
 
   const [modalOpened, setModalOpened] = useState(false);
+  
+
+*/}
+const FollowersCard = ({ location }) => {
   const [persons, setPersons] = useState([]);
   const { user } = useSelector((state) => state.authReducer.authData);
 
@@ -19,26 +24,14 @@ import { useSelector } from "react-redux";
     };
     fetchPersons();
   }, []);
-*/}
-const FollowersCard = ({ location }) => {
   return (
     <div className="FollowersCard">
       <h3>People you may know</h3>
 
-      {Followers. map((follower, id)=>{
+      {persons. map((person, id)=>{
+        if(person._id !== user._id)
         return (
-          <div className="follower">
-            <div>
-              <img src={follower.img} alt="" className="followerImage" />
-              <div className="name">
-                <span>{follower.name}</span>
-                <span>@{follower.username}</span>
-              </div>
-            </div>
-            <button className="button fc-button">
-              Follow
-            </button>
-          </div>
+          <User person= {person} key = {id}/>
         )
       })}
     </div>
