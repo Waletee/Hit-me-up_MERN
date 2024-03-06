@@ -1,7 +1,6 @@
 import UserModel from "../Models/UserModel.js";
-
 import bcrypt from "bcrypt";
-{/*import jwt from 'jsonwebtoken'*/}
+import jwt from 'jsonwebtoken'
 
 // Get a User
 export const getUser = async (req, res) => {
@@ -22,13 +21,12 @@ export const getUser = async (req, res) => {
 
 // Get all users
 export const getAllUsers = async (req, res) => {
-
   try {
     let users = await UserModel.find();
-    users = users.map((user)=>{
-      const {password, ...otherDetails} = user._doc
-      return otherDetails
-    })
+    users = users.map((user) => {
+      const { password, ...otherDetails } = user._doc;
+      return otherDetails;
+    });
     res.status(200).json(users);
   } catch (error) {
     res.status(500).json(error);
@@ -39,9 +37,9 @@ export const getAllUsers = async (req, res) => {
 export const updateUser = async (req, res) => {
   const id = req.params.id;
   // console.log("Data Received", req.body)
-  const { currentUserId, currentUserAdmin, password } = req.body;
-  
-  if (id === currentUserId || currentUserAdmin) {
+  const { _id, currentUserAdmin, password } = req.body;
+
+  if (id === _id /*|| currentUserAdmin*/) {
     try {
       // if we also have to update password then password will be bcrypted again
       if (password) {
@@ -52,22 +50,18 @@ export const updateUser = async (req, res) => {
       const user = await UserModel.findByIdAndUpdate(id, req.body, {
         new: true,
       });
-      res.status(200).json(user);
-      /*const token = jwt.sign(
+
+      const token = jwt.sign(
         { username: user.username, id: user._id },
-        process.env.JWTKEY,
+        process.env.JWT_KEY,
         { expiresIn: "1h" }
       );
-      console.log({user, token})
-      res.status(200).json({user, token});*/
+      res.status(200).json({ user, token });
     } catch (error) {
-      console.log("Error agya hy")
       res.status(500).json(error);
     }
   } else {
-    res
-      .status(403)
-      .json("Access Denied! You can update only your own Account");
+    res.status(403).json("Access Denied! You can update only your own Account");
   }
 };
 
@@ -93,7 +87,7 @@ export const deleteUser = async (req, res) => {
 export const followUser = async (req, res) => {
   const id = req.params.id;
   const { currentUserId } = req.body;
-  
+
   if (currentUserId == id) {
     res.status(403).json("Action Forbidden");
   } else {
@@ -109,7 +103,7 @@ export const followUser = async (req, res) => {
         res.status(403).json("you are already following this user");
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
       res.status(500).json(error);
     }
   }
@@ -120,27 +114,22 @@ export const unfollowUser = async (req, res) => {
   const id = req.params.id;
   const { currentUserId } = req.body;
 
-  if(currentUserId === id)
-  {
-    res.status(403).json("Action Forbidden")
-  }
-  else{
+  if (currentUserId === id) {
+    res.status(403).json("Action Forbidden");
+  } else {
     try {
-      const unFollowUser = await UserModel.findById(id)
-      const unFollowingUser = await UserModel.findById(currentUserId)
+      const unFollowUser = await UserModel.findById(id);
+      const unFollowingUser = await UserModel.findById(currentUserId);
 
-
-      if (unFollowUser.followers.includes(currentUserId))
-      {
-        await unFollowUser.updateOne({$pull : {followers: currentUserId}})
-        await unFollowingUser.updateOne({$pull : {following: id}})
-        res.status(200).json("Unfollowed Successfully!")
-      }
-      else{
-        res.status(403).json("You are not following this User")
+      if (unFollowUser.followers.includes(currentUserId)) {
+        await unFollowUser.updateOne({ $pull: { followers: currentUserId } });
+        await unFollowingUser.updateOne({ $pull: { following: id } });
+        res.status(200).json("Unfollowed Successfully!");
+      } else {
+        res.status(403).json("You are not following this User");
       }
     } catch (error) {
-      res.status(500).json(error)
+      res.status(500).json(error);
     }
   }
 };

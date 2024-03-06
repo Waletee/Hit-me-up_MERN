@@ -1,24 +1,17 @@
 import React, { useEffect, useState } from "react";
 import "./ProfileInfoCard.css";
-
 import ProfileModal from "../ProfileModal/ProfileModal";
-/*import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import * as UserApi from "../../api/UserRequests.js";
-import { logout } from "../../actions/AuthActions";*/
+import { logout } from "../../actions/AuthActions";
 
 const ProfileInfoCard = () => {
-  const [modalOpened, setModalOpened] = useState(false);
-  /*const dispatch = useDispatch()
+  const dispatch = useDispatch()
   const params = useParams();
   const profileUserId = params.id;
   const [profileUser, setProfileUser] = useState({});
   const { user } = useSelector((state) => state.authReducer.authData);
-
-
-  const handleLogOut = ()=> {
-    dispatch(logout())
-  }
 
 
   useEffect(() => {
@@ -26,44 +19,48 @@ const ProfileInfoCard = () => {
       if (profileUserId === user._id) {
         setProfileUser(user);
       } else {
-        console.log("fetching")
         const profileUser = await UserApi.getUser(profileUserId);
         setProfileUser(profileUser);
-        console.log(profileUser)
       }
     };
     fetchProfileUser();
-  }, [user]);*/
+  }, [user]);
+
+  const handleLogout = ()=> {
+    dispatch(logout())
+  }
 
   return (
     <div className="ProfileInfoCard">
       <div className="infoHead">
-        <h4>My Info</h4>
+        <h4>Profile Info</h4>
+        {user._id === profileUserId ? (
         <div>
-          <ProfileModal />
-        </div>
+          <ProfileModal data = {user} />
+        </div>) : ("")}
+        {/*location = 'profilePage'*/}
       </div>
 
       <div className="info">
         <span>
           <b>Status: </b>
         </span>
-        <span> Single</span>
+        <span> {profileUser.relationship}</span>
       </div>
       <div className="info">
         <span>
           <b>Lives in: </b>
         </span>
-        <span> Lagos, Nigeria</span>
+        <span> {profileUser.livesin}</span>
       </div>
       <div className="info">
         <span>
           <b>Works at: </b>
         </span>
-        <span> TOA Technologies</span>
+        <span> {profileUser.worksAt}</span>
       </div>
 
-      <button className="button logout-button" /*onClick={handleLogOut}*/>Log Out</button>
+      <button className="button logout-button" onClick={handleLogout}>Log Out</button>
     </div>
   );
 };

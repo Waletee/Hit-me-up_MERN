@@ -3,27 +3,32 @@ import "./ProfileCard.css";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-
-  const ProfileCard = ({location}) => {
+const ProfileCard = ({ location }) => {
   const { user } = useSelector((state) => state.authReducer.authData);
-  const posts = useSelector((state)=>state.postReducer.posts)
+  const posts = useSelector((state) => state.postReducer.posts);
   const serverPublic = process.env.REACT_APP_PUBLIC_FOLDER;
 
   return (
     <div className="ProfileCard">
       <div className="ProfileImages">
-        <img src={user.coverPicture
+      <img src={
+            user.coverPicture
               ? serverPublic + user.coverPicture
-              : serverPublic + "default_cover.jpeg"} alt="CoverImage" />
+              : serverPublic + "default_cover.jpeg"
+          } alt="CoverImage" />
         <img
-          src={user.profilePicture
-            ? serverPublic + user.profilePicture
-            : serverPublic + "default_profile.png"}
+          src={
+            user.profilePicture
+              ? serverPublic + user.profilePicture
+              : serverPublic + "default_profile.png"
+          }
           alt="ProfileImage"
         />
       </div>
       <div className="ProfileName">
-        <span>{user.firstname} {user.lastname}</span>
+        <span>
+          {user.firstname} {user.lastname}
+        </span>
         <span>{user.worksAt ? user.worksAt : "Where do you work?"}</span>
       </div>
 
@@ -40,13 +45,15 @@ import { Link } from "react-router-dom";
             <span>Following</span>
           </div>
           {/* for profilepage */}
-          {location === 'profilePage' && (
+          {location === "profilePage" && (
             <>
-            <div className="vl"></div>
-            <div className="follow">
-              <span>{posts.filter((post)=>post.userId === user._id).length}</span>
-              <span>Posts</span>
-            </div>
+              <div className="vl"></div>
+              <div className="follow">
+                <span>
+                  {posts.filter((post) => post.userId === user._id).length}
+                </span>
+                <span>Posts</span>
+              </div>
             </>
           )}
         </div>
@@ -56,7 +63,10 @@ import { Link } from "react-router-dom";
         ""
       ) : (
         <span>
-          <Link to={`/profile/${user._id}`} style={{ textDecoration: "none", color: "inherit" }}>
+          <Link
+            to={`/profile/${user._id}`}
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
             My Profile
           </Link>
         </span>
