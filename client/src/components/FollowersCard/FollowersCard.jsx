@@ -5,7 +5,7 @@ import User from "../User/User";
 /*import { Followers } from "../../Info/FollowerData"*/
 import { getAllUser } from "../../api/UserRequests";
 
-const FollowersCard = ({ location }) => {
+const FollowersCard = () => {
   const [persons, setPersons] = useState([]);
   const { user } = useSelector((state) => state.authReducer.authData);
 

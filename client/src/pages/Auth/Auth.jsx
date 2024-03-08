@@ -6,7 +6,7 @@ import { logIn, signUp } from "../../actions/AuthActions";
 
 
 const Auth = () => {
-  const [isSignUp, setIsSignUp] = useState(true);
+  const [isSignUp, setIsSignUp] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState(true);
   const dispatch = useDispatch()
   
@@ -42,12 +42,18 @@ const Auth = () => {
     setData(initialStates);
   };
 
-
   return (
     <div className="Auth">
-      {/* left side */}
-      <div className="a-right">
+      <div className="auth-body">
         <form className="infoForm authForm" onSubmit={handleSubmit}>
+      {/* Top side */}
+      <div className="top">
+        <div className="Webname">
+          <h1><img src={Logo} alt="" /> HIT ME UP</h1>
+          <h6>Let's connect and share, the world is a lovely place to share.</h6>
+        </div>
+      </div>
+      {/* Buttom side */}
         <h3>{isSignUp ? "Register" : "Login"}</h3>
           {isSignUp && (
             <div>
@@ -117,7 +123,7 @@ const Auth = () => {
           </span>
             <span
               style={{
-                fontSize: "12px",
+                fontSize: "14px",
                 cursor: "pointer",
                 textDecoration: "underline",
               }}
@@ -126,27 +132,16 @@ const Auth = () => {
               }}
             >
               {isSignUp
-                ? "Already have an account Login"
-                : "Don't have an account Sign up"}
+                ? "Already have an account click here to 'LOGIN'"
+                : "Don't have an account click here to 'SIGN UP'"}
             </span>
             <button
               className="button infoButton"
               type="Submit"
             >
-              { isSignUp ? "SignUp" : "Login"}
+              { isSignUp ? "Register" : "Login"}
             </button>
         </form>
-      </div>
-
-
-      {/* right form side */}
-      <div className="a-left">
-        <img src={Logo} alt="" />
-
-        <div className="Webname">
-          <h1>HIT ME UP</h1>
-          <h6>Let's connect and share, the world is a lovely place to share.</h6>
-        </div>
       </div>      
     </div>
   );

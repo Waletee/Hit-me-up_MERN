@@ -14,25 +14,29 @@
 }
 
 
-/* right side */
-.a-left {
-    gap: 2rem;
+/* top side */
+.top {
+  gap: 2rem;
+  margin-top: 2rem;
+  margin-right: 1rem;
+  margin-left: 1rem;
 }
 
-.a-left > img {
+.Webname > h1 > img {
   width: 4rem;
   height: 4rem;
 }
 
 .Webname > h1 {
     font-size: 3rem;
-    background-color: red;
+    display: flex;
+    justify-content: center;
   
     /* Create the gradient. */
     background-image: var(--buttonBg);
     
     /* Set the background size and repeat properties. */
-    background-size: 100%;
+    background-size: 400%;
     background-repeat: repeat;
   
     /* Use the text as a mask for the background. */
@@ -45,10 +49,22 @@
 
 .Webname > h6{
     font-size: 0.85rem;
+    /* Create the gradient. */
+    background-image: var(--buttonBg);
+    
+    /* Set the background size and repeat properties. */
+    background-size: 60%;
+    background-repeat: repeat;
+  
+    /* Use the text as a mask for the background. */
+    /* This will show the gradient as a text color rather than element bg. */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; 
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
 }
 
-
-/* left side */
+/* buttom side */
 .infoForm {
   display: flex;
   flex-direction: column;
