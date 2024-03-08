@@ -12,7 +12,7 @@ const ProfilePage = () => {
         <LogoSearch/>
         <ProfileCard/>
         <FollowersCard/>
-        <TrendCard/>
+        {/*<TrendCard/>*/}
     </div>
     )
 }

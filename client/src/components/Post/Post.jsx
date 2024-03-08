@@ -41,23 +41,6 @@ const Post = ({ data }) => {
       <span className="right-align"> {data.desc}</span>
 
       </div>
-      
-
-      {/*<div className="postReact">
-        <img
-          src={liked ? Like : NotLike}
-          alt=""
-          style={{ cursor: "pointer" }}
-          onClick={handleLike}
-        />
-        <img src={Comment} alt="" />
-        <img src={Share} alt="" />
-      </div>
-
-      <span style={{ color: "var(--gray)", fontSize: "12px" }}>
-        {likes} likes
-      </span>
-      */}
     </div>
   );
 };

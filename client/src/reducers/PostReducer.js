@@ -10,7 +10,8 @@ const postReducer = (
       return { ...state, posts: [action.data, ...state.posts], uploading: false, error: false };
     case "UPLOAD_FAIL":
       return { ...state, uploading: false, error: true };
-    // the below is for Posts.jsx
+    
+      // the below is for Posts.jsx
     case "RETREIVING_START":
       return { ...state, loading: true, error: false };
     case "RETREIVING_SUCCESS":

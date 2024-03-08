@@ -1,7 +1,5 @@
 import { useState } from 'react';
-import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { UilPen } from "@iconscout/react-unicons";
 import PostShare from "../PostShare/PostShare";
 
 function ShareModal() {

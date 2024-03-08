@@ -1,16 +1,14 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import "./Auth.css";
 import Logo from "../../Images/logo1.png";
 import { logIn, signUp } from "../../actions/AuthActions";
-/*import { useNavigate } from "react-router-dom";*/
+
 
 const Auth = () => {
   const [isSignUp, setIsSignUp] = useState(true);
   const [confirmPassword, setConfirmPassword] = useState(true);
   const dispatch = useDispatch()
-  /*const navigate = useNavigate()*/
-  /*const loading = useSelector((state) => state.authReducer.loading);*/
   
   const initialStates = {
     firstname: "",
@@ -28,18 +26,13 @@ const Auth = () => {
 
   // Form Submission
   const handleSubmit = (e) => {
-    /*setConfirmPassword(true);*/
     e.preventDefault();
     if(isSignUp) {
-      /*if(data.password !== data.confirmpassword)
-      {
-        setConfirmPassword(false)
-      }*/
       data.password === data.confirmpassword
-        ? dispatch(signUp(data/*, navigate*/))
+        ? dispatch(signUp(data))
         : setConfirmPassword(false);
     } else {
-      dispatch(logIn(data/*, navigate*/));
+      dispatch(logIn(data));
   };
 }
 
@@ -53,67 +46,6 @@ const Auth = () => {
   return (
     <div className="Auth">
       {/* left side */}
-      {/*<div className="a-right">
-        <form className="infoForm authForm">
-          <h3>{isSignUp ? "Register" : "Login"}</h3>
-          <div>
-          <input
-                required
-                type="text"
-                placeholder="First Name"
-                className="infoInput"
-                name="firstname"
-              />
-          <input
-                required
-                type="text"
-                placeholder="Last Name"
-                className="infoInput"
-                name="lastname"
-              />
-          </div>
-          <div>
-          <input
-                required
-                type="text"
-                placeholder="Username"
-                className="infoInput"
-                name="username"
-              />
-          </div>
-          <div>
-          <input
-                required
-                type="text"
-                placeholder="Password"
-                className="infoInput"
-                name="password"
-              />
-          <input
-                required
-                type="text"
-                placeholder="Confirm Password"
-                className="infoInput"
-                name="confirmpassword"
-              />
-          </div>
-          <span
-              style={{
-                fontSize: "12px",
-                cursor: "pointer",
-                textDecoration: "underline",
-              }}>
-              Already have an account Login
-            </span>
-            <button
-              className="button infoButton"
-              type="Submit"
-            >
-              SignUp
-            </button>
-        </form>
-            </div>*/}
-
       <div className="a-right">
         <form className="infoForm authForm" onSubmit={handleSubmit}>
         <h3>{isSignUp ? "Register" : "Login"}</h3>
@@ -200,15 +132,14 @@ const Auth = () => {
             <button
               className="button infoButton"
               type="Submit"
-              /*disabled={loading}*/
             >
-              {/*loading ? "Loading..." :*/ isSignUp ? "SignUp" : "Login"}
+              { isSignUp ? "SignUp" : "Login"}
             </button>
         </form>
       </div>
 
-      {/* right form side */}
 
+      {/* right form side */}
       <div className="a-left">
         <img src={Logo} alt="" />
 

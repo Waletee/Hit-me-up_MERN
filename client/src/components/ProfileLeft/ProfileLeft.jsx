@@ -13,7 +13,7 @@ const ProfileLeft = () => {
       <LogoSearch/>
       <ProfileInfoCard/>
       <FollowersCard/>
-      <TrendCard/>
+      {/*<TrendCard/>*/}
     </div>
   )
 }

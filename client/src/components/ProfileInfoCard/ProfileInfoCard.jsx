@@ -38,7 +38,6 @@ const ProfileInfoCard = () => {
         <div>
           <ProfileModal data = {user} />
         </div>) : ("")}
-        {/*location = 'profilePage'*/}
       </div>
 
       <div className="info">
