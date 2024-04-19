@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { UilPen } from "@iconscout/react-unicons";
+import { UilSetting } from "@iconscout/react-unicons";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { uploadImage } from "../../actions/UploadAction";
@@ -69,7 +69,7 @@ function ProfileModal({ data }) {
 
   return (
     <>
-      <UilPen width="2rem" height="1.2rem" onClick={handleShow} />
+      <UilSetting width="2rem" height="1.2rem" onClick={handleShow} />
 
       <Modal
         show={show}
@@ -85,7 +85,7 @@ function ProfileModal({ data }) {
           <form className="infoForm">
             <h3>{data.username}'s Information</h3>
             <div>
-            <label class="col-form-label">Firstname:</label>
+              <label class="col-form-label">Firstname:</label>
               <input
                 type="text"
                 className="infoInput"
@@ -105,7 +105,7 @@ function ProfileModal({ data }) {
               />
             </div>
             <div>
-            <label class="col-form-label">Username:</label>
+              <label class="col-form-label">Username:</label>
               <input
                 type="text"
                 className="infoInput"
@@ -116,7 +116,7 @@ function ProfileModal({ data }) {
               />
             </div>
             <div>
-            Where you Work:
+              Where you Work:
               <input
                 type="text"
                 className="infoInput"
@@ -136,7 +136,7 @@ function ProfileModal({ data }) {
               />
             </div>
             <div>
-            <label class="col-form-label">State/County:</label>
+              <label class="col-form-label">State/County:</label>
               <input
                 type="text"
                 className="infoInput"
@@ -175,7 +175,9 @@ function ProfileModal({ data }) {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <button className="button infoButton" onClick={handleSubmit}>Update</button>
+          <button className="button infoButton" onClick={handleSubmit}>
+            Update
+          </button>
         </Modal.Footer>
       </Modal>
     </>

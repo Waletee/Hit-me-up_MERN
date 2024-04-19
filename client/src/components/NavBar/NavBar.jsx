@@ -18,8 +18,8 @@ const Trend = () => {
         </Link>
         <img src={Comment} alt="" />
         <img src={Noti} alt="" />
-        <Link to={`/profile/${user._id}`}>
-        <UilSetting/>
+        <Link to= {`/profile/${user._id}`}>
+          <UilSetting/>
         </Link>
       </div>
     </div>
