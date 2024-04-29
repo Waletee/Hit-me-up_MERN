@@ -5,7 +5,6 @@ import { followUser, unfollowUser } from "../../actions/UserAction";
 
 const User = ({ person }) => {
   const publicFolder = process.env.REACT_APP_PUBLIC_FOLDER;
-  
   const { user } = useSelector((state) => state.authReducer.authData);
   const dispatch = useDispatch()
   

@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-const baseURL = process.env.BASEURL;
-const API = axios.create({ baseURL });
+
+const API = axios.create({ baseURL: 'https://hit-me-up-api.onrender.com' });
 
 export const logIn= (formData)=> API.post('/auth/login', formData);
 export const signUp = (formData) => API.post('/auth/register', formData);
