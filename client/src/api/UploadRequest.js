@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const API = axios.create({ baseURL: "https://hit-me-up-api.onrender.com" });
+const baseurl = process.env.BASE_URL;
+const API = axios.create({ baseURL: baseurl });
 
 API.interceptors.request.use((req) => {
   if (localStorage.getItem("profile")) {
