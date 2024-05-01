@@ -16,6 +16,11 @@ import MessageRoute from './Routes/MessageRoute.js'*/
 
 const app = express();
 
+
+app.get("/", (req, res) => {
+  res.json ("Hello Backend")
+})
+
 // Serve images from public folder
 app.use(express.static("public"));
 app.use("/images", express.static("images"));
