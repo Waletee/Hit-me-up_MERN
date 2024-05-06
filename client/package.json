@@ -2,7 +2,7 @@
   "name": "hit_me_up",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:5000",
+  "proxy": "https://hit-me-up-api.onrender.com",
   "dependencies": {
     "@iconscout/react-unicons": "^2.0.2",
     "@mantine/core": "^7.5.3",
