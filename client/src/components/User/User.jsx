@@ -25,8 +25,8 @@ const User = ({ person }) => {
         <img
           src={
             person.coverPicture
-              ? publicFolder + person.profilePicture
-              : publicFolder + "default_profile.png"
+              ? person.profilePicture
+              : "https://res.cloudinary.com/waletee/image/upload/v1715783864/default_profile_xbquso.png"
           }
           alt="Profile"
           className="followerImage"

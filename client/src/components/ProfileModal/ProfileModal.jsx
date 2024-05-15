@@ -36,7 +36,7 @@ function ProfileModal({ data }) {
   };
 
   // form submission
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     let UserData = formData;
     if (profileImage) {
@@ -45,18 +45,36 @@ function ProfileModal({ data }) {
       data.append("name", fileName);
       data.append("file", profileImage);
       UserData.profilePicture = fileName;
+      
+      const response = await dispatch(uploadImage(data));
+        if (response) {
+          UserData.profilePicture = response.data;
+          console.log("Image uploaded successfully:", response.data);
+        } else {
+          console.error("Error uploading image:", response);
+          // Handle upload failure
+        }
       try {
         dispatch(uploadImage(data));
       } catch (err) {
         console.log(err);
       }
     }
+    
     if (coverImage) {
       const data = new FormData();
       const fileName = Date.now() + coverImage.name;
       data.append("name", fileName);
       data.append("file", coverImage);
       UserData.coverPicture = fileName;
+      const response = await dispatch(uploadImage(data));
+        if (response) {
+          UserData.coverPicture = response.data;
+          console.log("Image uploaded successfully:", response.data);
+        } else {
+          console.error("Error uploading image:", response);
+          // Handle upload failure
+        }
       try {
         dispatch(uploadImage(data));
       } catch (err) {

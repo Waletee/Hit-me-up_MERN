@@ -14,7 +14,6 @@ export const createPost = async (req, res) => {
   }
 };
 
-
 // get a post
 export const getPost = async (req, res) => {
   const id = req.params.id;
@@ -83,12 +82,12 @@ export const likePost = async (req, res) => {
 
 // Get timeline posts
 export const getTimelinePosts = async (req, res) => {
-  const userId = req.params.id
+  const userId = req.params.id;
   try {
     const currentUserPosts = await PostModel.find({ userId: userId });
 
     const followingPosts = await UserModel.aggregate([
-      { 
+      {
         $match: {
           _id: new mongoose.Types.ObjectId(userId),
         },

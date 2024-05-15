@@ -1,14 +1,17 @@
 import axios from "axios";
 
 const API = axios.create({ baseURL: "https://hit-me-up-api.onrender.com" });
+//const API = axios.create({ baseURL: "http://localhost:5000" });
 
 API.interceptors.request.use((req) => {
-    if (localStorage.getItem('profile')) {
-      req.headers.Authorization = `Bearer ${JSON.parse(localStorage.getItem('profile')).token}`;
-    }
-  
-    return req;
-  });
+  if (localStorage.getItem("profile")) {
+    req.headers.Authorization = `Bearer ${
+      JSON.parse(localStorage.getItem("profile")).token
+    }`;
+  }
+
+  return req;
+});
 
 export const getUser = (userId) => API.get(`/user/${userId}`);
 export const updateUser = (id, formData) => API.put(`/user/${id}`, formData);

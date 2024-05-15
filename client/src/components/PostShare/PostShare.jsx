@@ -1,4 +1,4 @@
-import React, {useState, useRef} from "react";
+import React, { useState, useRef } from "react";
 import "./PostShare.css";
 /*import ProfileImage from "../../Images/Profile_avatar1.png"*/
 import { UilScenery } from "@iconscout/react-unicons";
@@ -12,12 +12,11 @@ import { uploadImage, uploadPost } from "../../actions/UploadAction";
 const PostShare = () => {
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.postReducer.uploading);
-  const serverPublic = process.env.REACT_APP_PUBLIC_FOLDER;
+  //const serverPublic = process.env.REACT_APP_PUBLIC_FOLDER;
   const [image, setImage] = useState(null);
   const imageRef = useRef();
   const { user } = useSelector((state) => state.authReducer.authData);
   const desc = useRef();
-  
 
   // handle Image Change
   const onImageChange = (e) => {
@@ -43,33 +42,47 @@ const PostShare = () => {
       desc.current.value = "";
     };
 
-    // if an image is added with the post
-    if (image) {
-      const data = new FormData();
-      const fileName = Date.now() + image.name;
-      data.append("name", fileName);
-      data.append("file", image);
-      newPost.image = fileName;
-      try {
-        dispatch(uploadImage(data));
-      } catch (err) {
-        console.log(err);
+    try {
+      if (image) {
+        const data = new FormData();
+        const fileName = Date.now() + image.name;
+        data.append("name", fileName);
+        data.append("file", image);
+        newPost.image = fileName;
+
+        const response = await dispatch(uploadImage(data));
+
+        if (response) {
+          newPost.image = response.data;
+          console.log("Image uploaded successfully:", response.data);
+        } else {
+          console.error("Error uploading image:", response);
+          // Handle upload failure
+        }
       }
+
+      dispatch(uploadPost(newPost));
+      resetShare();
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      // Handle general upload error
     }
-    dispatch(uploadPost(newPost));
-    resetShare();
   };
-  
+
   return (
     <div className="PostShare">
       <img
-        src={user.profilePicture
-          ? serverPublic + user.profilePicture
-          : serverPublic + "default_profile.png"}
+        src={
+          user.profilePicture
+            ? user.profilePicture
+            : "https://res.cloudinary.com/waletee/image/upload/v1715783864/default_profile_xbquso.png"
+        }
         alt="Profile"
       />
       <div>
-        <input ref={desc} required
+        <input
+          ref={desc}
+          required
           type="text"
           placeholder="A penny for your thought!"
         />
@@ -96,8 +109,11 @@ const PostShare = () => {
             Schedule
           </div>
           <button
-            className="button ps-button" onClick={handleUpload} disabled={loading}>
-            {loading? "Uploading..." : "Share"}
+            className="button ps-button"
+            onClick={handleUpload}
+            disabled={loading}
+          >
+            {loading ? "Uploading..." : "Share"}
           </button>
 
           <div style={{ display: "none" }}>

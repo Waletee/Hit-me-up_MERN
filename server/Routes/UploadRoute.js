@@ -1,48 +1,43 @@
 import express from "express";
 const router = express.Router();
 import multer from "multer";
-import {v2 as cloudinary} from 'cloudinary';         
+import { v2 as cloudinary } from "cloudinary";
 import dotenv from "dotenv";
 
 dotenv.config();
 
-cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_NAME,
-    api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET
-})
-
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "Public/images");
-  },
   filename: (req, file, cb) => {
     cb(null, req.body.name);
   },
 });
 const upload = multer({ storage: storage });
 
-router.post("/", upload.single("file"), (req, res) => {
-  cloudinary.uploader.upload(req.file.path, function (err, result) {
-    if (err) {
-      console.log(err);
-      return res.status(500).json({
-        success: false,
-        message: "Error",
-      });
-    }
-
-    res.status(200).json({
-      success: true,
-      message: "Uploaded!",
-      data: result,
-    });
-  });
-  /*try {
-      return res.status(200).json("File uploaded successfully");
-    } catch (error) {
-      console.error(error);
-    }*/
+//cloudinary setup
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
+
+// upload to cloudinary
+router.post("/", upload.single("file"), async (req, res) => {
+  try {
+    const result = await cloudinary.uploader.upload(req.file.path);
+    //console.log("Cloudinary upload result:", result.secure_url); // Log Cloudinary upload result
+    const imageUrl = result.secure_url; // Get the uploaded image URL
+    res.status(200).json(imageUrl); // Return Cloudinary URL
+  } catch (error) {
+    console.error("Error uploading image to Cloudinary:", error); // Log Cloudinary upload error
+    res.status(500).json({ error: "Image upload failed" });
+  }
+});
+
+/*router.post("/", upload.single("file"), async (req, res) => {
+  const x = await cloudinary.uploader.upload(req.file.path);
+  console.log("cloudinary", x);
+  res.send("Image Uploaded!");
+
+});*/
 
 export default router;
