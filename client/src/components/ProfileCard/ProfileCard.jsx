@@ -11,11 +11,14 @@ const ProfileCard = ({ location }) => {
   return (
     <div className="ProfileCard">
       <div className="ProfileImages">
-      <img src={
+        <img
+          src={
             user.coverPicture
               ? user.coverPicture
               : "https://res.cloudinary.com/waletee/image/upload/v1715783864/default_cover_tbe0sw.jpg"
-          } alt="CoverImage" />
+          }
+          alt="CoverImage"
+        />
         <img
           src={
             user.profilePicture
@@ -29,7 +32,11 @@ const ProfileCard = ({ location }) => {
         <span>
           {user.firstname} {user.lastname}
         </span>
-        <span>{user.worksAt ? user.worksAt : "Where do you work?"}</span>
+        <span>
+          {user.worksAt
+            ? user.worksAt
+            : "Kindly update your profile from the My Profile below"}
+        </span>
       </div>
 
       <div className="followStatus">
